@@ -1,0 +1,58 @@
+<aside class="main-header">
+    <div class="main-container">
+        <div class="main-logo">
+            <a href="{% url 'studies:home' %}">
+                <span class="material-symbols-outlined">
+                    library_books
+                </span>
+                <h1>Study Organizer</h1>
+            </a>
+        </div>
+        {% if user.is_authenticated %}
+        <ul class="navbar">
+            <li class="nav-item">
+                <a class="user-dropdown" href="#" role="button">
+                    <span class="material-symbols-outlined">
+                        account_circle
+                    </span>
+                    <p>
+                        {{ request.user.username }}
+                    </p>
+                    <span class="material-symbols-outlined arrow_drop_down">
+                        arrow_drop_down
+                    </span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="dropdown-item">
+                        <a class="logout-link" href="{% url 'accounts:logout' %}">
+                            <span class="material-symbols-outlined">
+                            logout
+                            </span>
+                            Sair
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        {% else %}
+        <ul class="navbar">
+            <li class="nav-item">
+                <a href="{% url 'accounts:register' %}" role="button">
+                    <span class="material-symbols-outlined">
+                        how_to_reg
+                    </span>
+                    <p>Registrar-se</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'accounts:login' %}" role="button">
+                    <span class="material-symbols-outlined">
+                        login
+                    </span>
+                    <p>Entrar</p>
+                </a>
+            </li>
+        </ul>
+        {% endif %}
+    </div>
+</aside>

@@ -1,0 +1,240 @@
+{% extends 'global/base.html' %}
+
+{% block content %}
+    <section class="main-content">
+        <h2 class="main-title">Estudos</h2>
+
+        {% include 'global/partials/messages.html' %}
+
+        <article class="main-buttons">
+            <div class="new-study">
+                <label class="button open-modal" for="modal-new-study">
+                    <span class="material-symbols-outlined add">add</span>
+                    <p>Novo estudo</p>
+                </label>
+                <input type="checkbox" id="modal-new-study" class="checkbox-modal">
+                <div class="modal">
+                    <div class="content-modal">
+                        <label for="modal-new-study" class="close-modal">
+                            <span class="material-symbols-outlined cancel">
+                                close
+                            </span>
+                        </label>
+                        <div class="main-form">
+                            <form action="{% url 'studies:create_study' %}" method="POST">
+                                {% csrf_token %}
+                                <div class="form-content form-content-grid">
+                                    {% for field in form_study %}
+                                    <div class="form-group {{ field.field.widget.attrs.class }}">
+                                        {{ field.label_tag }}
+
+                                        {{ field }}
+
+                                        <p class="help-text">{{ field.help_text }}</p>
+            
+                                        {{ field.errors }}
+                                    </div>
+                                    {% endfor %}
+                                    <div class="form-content form-content-grid">
+                                        <div class="form-group">
+                                            <button class="button-generic" type="submit">Adicionar</button>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="new-subject">
+                <label class="button open-modal" for="modal-new-subject">
+                    <span class="material-symbols-outlined add">add</span>
+                    <p>Novo assunto</p>
+                </label>
+                <input type="checkbox" id="modal-new-subject" class="checkbox-modal">
+                <div class="modal">
+                    <div class="content-modal">
+                        <label for="modal-new-subject" class="close-modal">
+                            <span class="material-symbols-outlined cancel">
+                                close
+                            </span>
+                        </label>
+                        <div class="main-form">
+                            <form action="{% url 'studies:create_subject' %}" method="POST">
+                                {% csrf_token %}
+                                <div class="form-content form-content-grid">
+                                    {% for field in form_subject %}
+                                    <div class="form-group {{ field.field.widget.attrs.class }}">
+                                        {{ field.label_tag }}
+
+                                        {{ field }}
+
+                                        <p class="help-text">{{ field.help_text }}</p>
+            
+                                        {{ field.errors }}
+                                    </div>
+                                    {% endfor %}
+                                    <div class="form-content form-content-grid">
+                                        <div class="form-group">
+                                            <button class="button-generic" type="submit">Adicionar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article class="main-week-studies">
+            <div class="weekday">
+                <div class="weekday-title">
+                    <h2>Domingo</h2>
+                </div>
+                <div class="weekday-content">
+                    <ul>
+                    {% for study in studies %}
+                        {% if study.weekday == 'Sunday' %}
+
+                            {% include 'studies/partials/subjects.html' %}
+
+                        {% endif %}
+                    {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="weekday">
+                <div class="weekday-title">
+                    <h2>Segunda</h2>
+                </div>
+                <div class="weekday-content">
+                    <ul>
+                    {% for study in studies %}
+                        {% if study.weekday == 'Monday' %}
+
+                            {% include 'studies/partials/subjects.html' %}
+
+                        {% endif %}
+                    {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="weekday">
+                <div class="weekday-title">
+                    <a href="{% url 'studies:weekday' 'Tuesday' %}">
+                        <h2>Terça</h2>
+                    </a>
+                </div>
+                <div class="weekday-content">
+                    <ul>
+                    {% for study in studies %}
+                        {% if study.weekday == 'Tuesday' %}
+                            
+                            {% include 'studies/partials/subjects.html' %}
+
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="weekday">
+                <div class="weekday-title">
+                    <a href="{% url 'studies:weekday' 'Wednesday' %}">
+                        <h2>Quarta</h2>
+                    </a>
+                </div>
+                <div class="weekday-content">
+                    <ul>
+                    {% for study in studies %}
+                        {% if study.weekday == 'Wednesday' %}
+
+                            {% include 'studies/partials/subjects.html' %}
+
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="weekday">
+                <div class="weekday-title">
+                    <h2>Quinta</h2>
+                </div>
+                <div class="weekday-content">
+                    <ul>
+                    {% for study in studies %}
+                        {% if study.weekday == 'Thursday' %}
+
+                            {% include 'studies/partials/subjects.html' %}
+
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="weekday">
+                <div class="weekday-title">
+                    <h2>Sexta</h2>
+                </div>
+                <div class="weekday-content">
+                    <ul>
+                    {% for study in studies %}
+                        {% if study.weekday == 'Friday' %}
+
+                            {% include 'studies/partials/subjects.html' %}
+
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="weekday">
+                <div class="weekday-title">
+                    <h2>Sábado</h2>
+                </div>
+                <div class="weekday-content">
+                    <ul>
+                    {% for study in studies %}
+                        {% if study.weekday == 'Saturday' %}
+
+                            {% include 'studies/partials/subjects.html' %}
+
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </article>
+
+        <article class="main-subjects-list">
+            <h3 class="main-title">Assuntos</h3>
+            <div class="subjects-grid">
+                <ul>
+                    {% for subject in subjects %}
+                    <a class="subject-link" href="{% url 'studies:subject' subject.id %}">
+                        <li class="main-subject {{ subject.color }}">
+                            <div class="subject-content">
+                                <div class="subject-title">
+                                    {{ subject.name }}
+                                </div>
+                            </div>
+                            <form class="form-delete inline" action="{% url 'studies:delete_subject' subject.id %}" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="id" value="id-subject">
+                
+                                <button type="submit" class="link-danger plaintext-button"><span class="material-symbols-outlined">
+                                delete
+                                </span></button>
+                            </form>
+                        </li>
+                    </a>
+                    {% empty %}
+                        <p class="center">Nenhum assunto encontrado. Adicione um novo assunto para começar a organizar seus estudos.</p>
+                    {% endfor %}
+                </ul>
+            </div>
+        </article>
+
+    </section>
+
+{% endblock content %}

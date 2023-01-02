@@ -1,0 +1,44 @@
+{% extends 'global/base.html' %}
+
+{% block content %}
+<section class="main-content">
+    <h2 class="main-title">Histórico</h2>
+    <article class="main-container-month">
+        <div class="month-grid">
+            <p>Domingo</p>
+            <p>Segunda</p>
+            <p>Terça</p>
+            <p>Quarta</p>
+            <p>Quinta</p>
+            <p>Sexta</p>
+            <p>Sabado</p>
+            {% for weekday in month %}
+                {% for day in weekday %}
+                    <div class="day-content">
+                        {% if day != 0 %}
+                            <p class="day-title">{{ day }}</p>
+                        {% endif %}
+                        <ul>
+                            {% for historic in historics %}
+                                {% if historic.date.day == day %}
+                                    <li class="weekday-subject {{ historic.study.subject.color }}">
+                                        <div class="subject-content">
+                                            <div class="subject-title">
+                                                {{ historic.study.subject }}
+                                            </div>
+                                            
+                                            {% for content in historic.contents_studied.all %}
+                                                <p class="list-content">{{ content }}</p>
+                                            {% endfor %}
+                                        </div>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </article>
+</section>
+{% endblock content %}
